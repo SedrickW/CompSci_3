@@ -1,15 +1,26 @@
-/* oneChar.c
- * Writes a single character on the screen.
+/* echoChar1.c
+ * Echoes a character entered by the user.
  * 2017-09-29: Bob Plantz
  */
 
-#include <iostream>
-#include <fstream>
+#include <unistd.h>
 
 int main(void)
 {
-    char aLetter = 'A';
-    std::basic_ostream::write(STDOUT_FILENO, &aLetter, 1); // STDOUT_FILENO is
-                                       // defined in unistd.h
+    char *aLetter;
+    char* starting_pos = aLetter;
+    write(STDOUT_FILENO, "Enter a line of character: ", 27); // prompt user
+    while (*aLetter != '\0')
+    {
+        read(STDIN_FILENO, &aLetter, 1);                   // whole line of characters
+        aLetter++;
+    }
+    
+    write(STDOUT_FILENO, "You entered: ", 13);         // message
+    while (starting_pos != aLetter)
+    {
+        write(STDOUT_FILENO, &starting_pos, 1);                 // echo character
+        starting_pos++;
+    }
     return 0;
 }
