@@ -15,7 +15,8 @@ int main(void)
         read(STDIN_FILENO, &aLetter, 1);                   // whole line of characters
         aLetter++;
     }
-    
+    *aLetter = '/0';
+
     write(STDOUT_FILENO, "You entered: ", 13);         // message
     while (starting_pos != aLetter)
     {
